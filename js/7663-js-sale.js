@@ -96,7 +96,7 @@ const stakeOne = async (e)=> {
 			  	const gas = Math.round( await contract2.methods.stake(tokenId).estimateGas({from: account, to: CONTRACT_STAKE, }) * 1.1 );
 			  	result = await contract2.methods.stake(tokenId).send({from: account, to: CONTRACT_STAKE, gas: gas});
 
-				success = document.getElementById(tokenId).innerHTML = "STAKED!";
+				success = document.getElementById(tokenId).innerHTML = "At Work!";
 			  	} 
 		  	catch(e)
 			  	{
@@ -125,7 +125,7 @@ const unstakeOne = async (e)=> {
 			  	const gas = Math.round( await contract2.methods.unstake(tokenId).estimateGas({from: account, to: CONTRACT_STAKE, }) * 1.1 );
 			  	result = await contract2.methods.unstake(tokenId).send({from: account, to: CONTRACT_STAKE, gas: gas});
 
-				success = document.getElementById(tokenId).innerHTML = "UNSTAKED!";
+				success = document.getElementById(tokenId).innerHTML = "At Home!";
 			  	} 
 		  catch(e)
 			  	{
@@ -260,7 +260,7 @@ const getTokens = async (e)=> {
 					let div = document.createElement('p');
 					div.className = 'NFTcard';
         			div.innerHTML = '<img class="card-image" src="images/dogliens/'
-					+ colTokensArray[i] + '.png" onerror="this.src=' + "'images/load.png'" + '"> <a class="card-text"> DOGLIEN #' + colTokensArray[i]
+					+ colTokensArray[i] + '.png" onerror="this.src=' + "'images/load.png'" + '"> <a class="card-text"> DOGLIEN ID: ' + colTokensArray[i]
 					+ ' </a> <br> <a class="card-text"> Available </a> <br> <button class="card-stk-btn" onclick="stakeOne(tokenId = [this.id])" id="' 
 					+ colTokensArray[i] + '"> PUT TO WORK </button>';
         		
@@ -318,7 +318,7 @@ const getTokens2 = async (e)=> {
 					let div = document.createElement('p');
 					div.className = 'NFTcard';
         			div.innerHTML = '<img class="card-image" src="images/dogliens/'
-					+ stakedTokensArray[i] + '.PNG" onerror="this.src=' + "'images/load.png'" + '"> <a class="card-text"> DOGLIEN #' + stakedTokensArray[i]
+					+ stakedTokensArray[i] + '.png" onerror="this.src=' + "'images/load.png'" + '"> <a class="card-text"> DOGLIEN ID: ' + stakedTokensArray[i]
 					+ ' </a> <br> <a class="card-text"> At Work </a> <br> <button class="card-unstk-btn" onclick="unstakeOne(tokenId = [this.id])" id="'
 					+ stakedTokensArray[i] + '"> BRING HOME </button>';
 
