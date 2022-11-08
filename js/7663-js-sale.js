@@ -382,7 +382,7 @@ const minutes = document.getElementById("minutes");
 const seconds = document.getElementById("seconds");
 
 const currentYear = new Date().getUTCFullYear();
-const launchDate = new Date(`Dec 1 ${currentYear} 12:00:00`);
+const launchDate = new Date(`Dec 12 ${currentYear} 16:00:00`);
 
 var diff = null;
 
