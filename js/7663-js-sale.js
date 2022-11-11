@@ -382,7 +382,8 @@ const getTokens = async (e)=> {
 					let div = document.createElement('p');
 					div.className = 'NFTcard';
         			div.innerHTML = '<img class="card-image" src="images/dogliens/'
-					+ colTokensArray[i] + '.png" onerror="this.src=' + "'images/load.png'" + '"> <a class="card-text"> DOGLIEN ID: ' + colTokensArray[i]
+					+ colTokensArray[i] + '.png" onerror="this.src=' + "'images/load.png'" + '"> <img class="card-select-btn" src="images/select-btn-2.png" onclick="select(tokenId = [this.id])" id="' 
+					+ colTokensArray[i] + "card" + '"> <a class="card-text"> DOGLIEN ID: ' + colTokensArray[i]
 					+ ' </a> <br> <a class="card-text"> Available </a> <br> <button class="card-stk-btn" onclick="stakeOne(tokenId = [this.id])" id="' 
 					+ colTokensArray[i] + '"> PUT TO WORK </button>';
         		
@@ -424,7 +425,8 @@ const getTokens2 = async (e)=> {
 					let div = document.createElement('p');
 					div.className = 'NFTcard';
         			div.innerHTML = '<img class="card-image" src="images/dogliens/'
-					+ stakedTokensArray[i] + '.png" onerror="this.src=' + "'images/load.png'" + '"> <a class="card-text"> DOGLIEN ID: ' + stakedTokensArray[i]
+					+ stakedTokensArray[i] + '.png" onerror="this.src=' + "'images/load.png'" + '"> <img class="card-select-btn" src="images/select-btn-2.png" onclick="select(tokenId = [this.id])" id="' 
+					+ stakedTokensArray[i] + "card" + '"> <a class="card-text"> DOGLIEN ID: ' + stakedTokensArray[i]
 					+ ' </a> <br> <a class="card-text"> At Work </a> <br> <button class="card-unstk-btn" onclick="unstakeOne(tokenId = [this.id])" id="'
 					+ stakedTokensArray[i] + '"> BRING HOME </button>';
 
