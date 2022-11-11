@@ -269,13 +269,13 @@ const select = async (e)=> {
 					document.getElementById("stakeSelected").innerHTML = "STAKE SELECTED";
 					}
 				}
-			else
+				else
 				{
 				if (unstakeSelectedTokens.indexOf(tokenS) === -1) {
 					unstakeSelectedTokens.push(tokenS);
 					document.getElementById(tokenId).src = 'images/select-btn-1.png';
 					}
-				else
+					else
 					{
 					unstakeSelectedTokens.splice(removeThisToken2,1);
 					document.getElementById(tokenId).src = 'images/select-btn-2.png';
@@ -316,10 +316,10 @@ const stakeSelected = async (e)=> {
 			  {
 			  alert("Error: " + e.message)
 			  console.log("Error: ",e)
-			  document.getElementById("tokens_available").innerHTML = totalStaked + " / " + 7777;
+			  document.getElementById("tokens_available").innerHTML = totalStaked + " / " + 1500;
 			  }
 		  	}
-	  	else
+	  		else
 		  	{
 		  	alert("No tokens selected to stake.")
 		  	console.log("No tokens selected to stake.");
@@ -350,10 +350,10 @@ const unstakeSelected = async (e)=> {
 			  {
 			  alert("Error: " + e.message)
 			  console.log("Error: ",e)
-			  document.getElementById("tokens_available").innerHTML = totalStaked + " / " + 7777;
+			  document.getElementById("tokens_available").innerHTML = totalStaked + " / " + 1500;
 			  }
 		  	}
-	  	else
+	  		else
 		  	{
 			alert("No tokens selected to unstake.")
 			console.log("No tokens selected to unstake.");
@@ -391,26 +391,10 @@ const getTokens = async (e)=> {
 			 		}
 				}
 
-			/*
-			if (getTokensArray != "") {
-				for(var i=0 ; i<NFTamount ; i++) {
-					let div = document.createElement('p');
-					div.className = 'NFTcard';
-        			div.innerHTML = '<img class="card-image" src="https://gateway.pinata.cloud/ipfs/QmNeNaMHfsTGrdbd676w2RyTPUWs7pZKHBhreBP8t694Jq/' 
-					+ colTokensArray[i] + '.png" onerror="this.src=' + "'images/load.png'" + '"> <a class="card-text"> CyberPunk #' + colTokensArray[i]
-					+ ' </a> <br> <a class="card-text"> Unstaked </a> <br> <button class="card-stk-btn" onclick="stakeOne(tokenId = [this.id])" id="' 
-					+ colTokensArray[i] + '"> STAKE </button>';
-        		
-					const NFTcard = document.getElementById('grid');
-					NFTcard.appendChild(div);
-			 		}
-				}
-			*/
-
 			if (colTokensArray != "") {
 				document.getElementById("unstakeIds").innerHTML = NFTamount ;
 				}
-			else
+				else
 				{
 				document.getElementById("unstakeIds").innerHTML = "No more Dogliens for work.";
 				}
@@ -449,26 +433,10 @@ const getTokens2 = async (e)=> {
 			 		}
 				}
 
-			/*
-			if (tokensStaked != "") {
-				for(var i=0 ; i<NFTstaked ; i++) {
-					let div = document.createElement('p');
-					div.className = 'NFTcard';
-        			div.innerHTML = '<img class="card-image" src="https://gateway.pinata.cloud/ipfs/QmNeNaMHfsTGrdbd676w2RyTPUWs7pZKHBhreBP8t694Jq/'
-					+ stakedTokensArray[i] + '.png" onerror="this.src=' + "'images/load.png'" + '"> <a class="card-text"> CyberPunk #' + stakedTokensArray[i]
-					+ ' </a> <br> <a class="card-text"> Already staked </a> <br> <button class="card-unstk-btn" onclick="unstakeOne(tokenId = [this.id])" id="'
-					+ stakedTokensArray[i] + '"> UNSTAKE </button>';
-
-					const NFTcard = document.getElementById('grid');
-					NFTcard.appendChild(div);
-			 		}
-				}
-			*/
-
 			if (stakedTokensArray != "") {
 				document.getElementById("stakeIds").innerHTML = NFTstaked ;
 				}
-			else
+				else
 				{
 				document.getElementById("stakeIds").innerHTML = "No staked dogliens.";
 				}
@@ -476,53 +444,6 @@ const getTokens2 = async (e)=> {
   		}
   		return false;
 	}
-
-// WHITELIST MINT
-const whitelistMint = async (e)=> {
-	if (typeof window.ethereum !== 'undefined') {
-    	console.log('MetaMask is installed!');
-    	const accounts = await window.ethereum.request({ method: 'eth_requestAccounts' })
-		var account = accounts[0];
-    	
-    if (account.length > 0) {
-			var result = "";
-			var success = "";
-			document.getElementById("tokens_available").innerHTML = "WORKING...";
-
-			try {
-			  const accounts = await window.ethereum.request({ method: 'eth_requestAccounts' });
-			  account = accounts[0];
-
-			  const web3 = new Web3(window.ethereum);
-			  contract2 = new web3.eth.Contract(ABI_STAKE, CONTRACT_STAKE, {from: account});
-			  
-			  var chAccount = web3.utils.toChecksumAddress(account);
-			  var addressIndex = signatures.indexOf(chAccount);
-
-			  if (addressIndex != -1) {
-				  addressSign = signatures[addressIndex + 1];
-				  }
-			  else
-				  {
-				  addressSign = signatures[0];
-				  }
-			  
-			  value = (price * 4);
-
-			  const gas = Math.round( await contract2.methods.mintHeadache(4,addressSign).estimateGas({value: value.toString(), from: account}) * 1.1 );
-			  result = await contract2.methods.mintHeadache(4,addressSign).send({value: value.toString(), from: account, gas: gas});
-
-			  success = document.getElementById("tokens_available").innerHTML = "SUCCESS!";
-			  } 
-		  	catch(e)
-			  {
-          	alert("Error: " + e.message);
-          	console.log("Error: ",e);
-			document.getElementById("tokens_available").innerHTML = totalStaked + " / " + 1500;
-			  }
-		}
-	}
-}
 
 //CONNECT YOUR WALLET
 const connect = async (e)=> {
@@ -551,7 +472,7 @@ const connect = async (e)=> {
 				{
 				document.getElementById("rewards").innerHTML = earningInfoRest.substr(0,8);
 				}
-			else
+				else
 				{
 				document.getElementById("rewards").innerHTML = "No rewards to claim.";
 				}
@@ -560,7 +481,7 @@ const connect = async (e)=> {
 			await getTokens();
 			getTokens2();
 			}
-    	else
+    			else
 			{
         	document.getElementById("connect_button").innerHTML = "Connect wallet";
 			}
