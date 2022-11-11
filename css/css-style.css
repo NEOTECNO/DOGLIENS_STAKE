@@ -202,6 +202,24 @@ body {
   -webkit-filter: drop-shadow(0px 0px 4px #ffffff);
 }
 
+.card-select-btn {
+  position: absolute;
+  top: 14px;
+  right: 14px;
+  width: 40px;
+  height: 40px;
+  border-radius: 20px;
+  -webkit-border-radius: 20px;
+  -moz-border-radius: 20px;
+  -ms-border-radius: 20px;
+  -o-border-radius: 20px;
+}
+.card-select-btn:hover {
+  background-color: #ffffff;
+  filter: drop-shadow(0px 0px 4px #ffffff);
+  -webkit-filter: drop-shadow(0px 0px 4px #ffffff);
+}
+
 .card-unstk-btn {
   margin: 5px 0 0 10px;
   background-color: #ff0000;
@@ -585,6 +603,7 @@ body {
   padding: 2px 40px;
   transition: all 0.4s ease 0s;
   margin-right: 5px;
+  margin-bottom: 10px;
   font-size: 15px;
   font-weight: 700;
   text-transform: uppercase;

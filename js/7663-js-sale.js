@@ -14,6 +14,8 @@ var price = null;
 var tokenId = [];
 var colTokensArray = [];
 var stakedTokensArray = [];
+var stakeSelectedTokens = [];
+var unstakeSelectedTokens = [];
 var totalStaked = "";
 var earningInfo = "";
 var approved = "";
@@ -239,6 +241,126 @@ const claim = async (e)=> {
   		}
 	}
 
+//SELECT TOKENS
+const select = async (e)=> {
+	if (typeof window.ethereum !== 'undefined') {
+	  	if (tokenId != "") {
+			var tString = tokenId.toString();
+			var tokenS = tString.slice(0,-4);
+			var removeThisToken = stakeSelectedTokens.indexOf(tokenS);
+			var removeThisToken2 = unstakeSelectedTokens.indexOf(tokenS);
+
+			if (colTokensArray.indexOf(tokenS) != -1) {
+				if (stakeSelectedTokens.indexOf(tokenS) === -1) {
+					stakeSelectedTokens.push(tokenS);
+					document.getElementById(tokenId).src = 'images/select-btn-1.png';
+				}
+				else
+				{
+					stakeSelectedTokens.splice(removeThisToken,1);
+					document.getElementById(tokenId).src = 'images/select-btn-2.png';
+				}
+
+				if (stakeSelectedTokens.length != 0) {
+					document.getElementById("stakeSelected").innerHTML = "STAKE SELECTED " + "(" + stakeSelectedTokens.length + ")";
+					}
+
+				if (stakeSelectedTokens.length == 0) {
+					document.getElementById("stakeSelected").innerHTML = "STAKE SELECTED";
+					}
+				}
+			else
+				{
+				if (unstakeSelectedTokens.indexOf(tokenS) === -1) {
+					unstakeSelectedTokens.push(tokenS);
+					document.getElementById(tokenId).src = 'images/select-btn-1.png';
+					}
+				else
+					{
+					unstakeSelectedTokens.splice(removeThisToken2,1);
+					document.getElementById(tokenId).src = 'images/select-btn-2.png';
+					}
+	
+				if (unstakeSelectedTokens.length != 0) {
+					document.getElementById("unstakeSelected").innerHTML = "UNSTAKE SELECTED " + "(" + unstakeSelectedTokens.length + ")";
+					}
+	
+				if (unstakeSelectedTokens.length == 0) {
+					document.getElementById("unstakeSelected").innerHTML = "UNSTAKE SELECTED";
+					}
+				}
+			}
+		}
+  	}
+
+//STAKE SELECTED TOKENS
+const stakeSelected = async (e)=> {
+	if (typeof window.ethereum !== 'undefined') {
+	  	if (stakeSelectedTokens.length != 0) {
+		  	var result = "";
+		  	var success = "";
+		  	document.getElementById("tokens_available").innerHTML = "WORKING...";
+			try {
+			  const accounts = await window.ethereum.request({ method: 'eth_requestAccounts' });
+			  account = accounts[0];
+
+			  const web3 = new Web3(window.ethereum);
+			  contract2 = new web3.eth.Contract(ABI_STAKE, CONTRACT_STAKE, { from: account });
+
+			  const gas = Math.round( await contract2.methods.stake(stakeSelectedTokens).estimateGas({value: 0, from: account}) * 1.1 );
+			  result = await contract2.methods.stake(stakeSelectedTokens).send({value: 0, from: account, gas: gas});
+
+			  success = document.getElementById("tokens_available").innerHTML = "SUCCESS!";
+			  } 
+		  	catch(e)
+			  {
+			  alert("Error: " + e.message)
+			  console.log("Error: ",e)
+			  document.getElementById("tokens_available").innerHTML = totalStaked + " / " + 7777;
+			  }
+		  	}
+	  	else
+		  	{
+		  	alert("No tokens selected to stake.")
+		  	console.log("No tokens selected to stake.");
+		  	}
+		}
+  	}
+
+//UNSTAKE SELECTED TOKENS
+const unstakeSelected = async (e)=> {
+	if (typeof window.ethereum !== 'undefined') {
+	  	if (unstakeSelectedTokens.length != 0) {
+		  	var result = "";
+		  	var success = "";
+		  	document.getElementById("tokens_available").innerHTML = "WORKING...";
+			try {
+			  const accounts = await window.ethereum.request({ method: 'eth_requestAccounts' });
+			  account = accounts[0];
+
+			  const web3 = new Web3(window.ethereum);
+			  contract2 = new web3.eth.Contract(ABI_STAKE, CONTRACT_STAKE, { from: account });
+
+			  const gas = Math.round( await contract2.methods.unstake(unstakeSelectedTokens).estimateGas({value: 0, from: account}) * 1.1 );
+			  result = await contract2.methods.unstake(unstakeSelectedTokens).send({value: 0, from: account, gas: gas});
+
+			  success = document.getElementById("tokens_available").innerHTML = "SUCCESS!";
+			  } 
+		  	catch(e)
+			  {
+			  alert("Error: " + e.message)
+			  console.log("Error: ",e)
+			  document.getElementById("tokens_available").innerHTML = totalStaked + " / " + 7777;
+			  }
+		  	}
+	  	else
+		  	{
+			alert("No tokens selected to unstake.")
+			console.log("No tokens selected to unstake.");
+			}
+		}
+  	}
+
 //GET YOUR COLLECTION TOKENS IDs
 const getTokens = async (e)=> {
 	if (typeof window.ethereum !== 'undefined') {
@@ -268,6 +390,22 @@ const getTokens = async (e)=> {
 					NFTcard.appendChild(div);
 			 		}
 				}
+
+			/*
+			if (getTokensArray != "") {
+				for(var i=0 ; i<NFTamount ; i++) {
+					let div = document.createElement('p');
+					div.className = 'NFTcard';
+        			div.innerHTML = '<img class="card-image" src="https://gateway.pinata.cloud/ipfs/QmNeNaMHfsTGrdbd676w2RyTPUWs7pZKHBhreBP8t694Jq/' 
+					+ colTokensArray[i] + '.png" onerror="this.src=' + "'images/load.png'" + '"> <a class="card-text"> CyberPunk #' + colTokensArray[i]
+					+ ' </a> <br> <a class="card-text"> Unstaked </a> <br> <button class="card-stk-btn" onclick="stakeOne(tokenId = [this.id])" id="' 
+					+ colTokensArray[i] + '"> STAKE </button>';
+        		
+					const NFTcard = document.getElementById('grid');
+					NFTcard.appendChild(div);
+			 		}
+				}
+			*/
 
 			if (colTokensArray != "") {
 				document.getElementById("unstakeIds").innerHTML = NFTamount ;
@@ -311,6 +449,22 @@ const getTokens2 = async (e)=> {
 			 		}
 				}
 
+			/*
+			if (tokensStaked != "") {
+				for(var i=0 ; i<NFTstaked ; i++) {
+					let div = document.createElement('p');
+					div.className = 'NFTcard';
+        			div.innerHTML = '<img class="card-image" src="https://gateway.pinata.cloud/ipfs/QmNeNaMHfsTGrdbd676w2RyTPUWs7pZKHBhreBP8t694Jq/'
+					+ stakedTokensArray[i] + '.png" onerror="this.src=' + "'images/load.png'" + '"> <a class="card-text"> CyberPunk #' + stakedTokensArray[i]
+					+ ' </a> <br> <a class="card-text"> Already staked </a> <br> <button class="card-unstk-btn" onclick="unstakeOne(tokenId = [this.id])" id="'
+					+ stakedTokensArray[i] + '"> UNSTAKE </button>';
+
+					const NFTcard = document.getElementById('grid');
+					NFTcard.appendChild(div);
+			 		}
+				}
+			*/
+
 			if (stakedTokensArray != "") {
 				document.getElementById("stakeIds").innerHTML = NFTstaked ;
 				}
@@ -322,6 +476,53 @@ const getTokens2 = async (e)=> {
   		}
   		return false;
 	}
+
+// WHITELIST MINT
+const whitelistMint = async (e)=> {
+	if (typeof window.ethereum !== 'undefined') {
+    	console.log('MetaMask is installed!');
+    	const accounts = await window.ethereum.request({ method: 'eth_requestAccounts' })
+		var account = accounts[0];
+    	
+    if (account.length > 0) {
+			var result = "";
+			var success = "";
+			document.getElementById("tokens_available").innerHTML = "WORKING...";
+
+			try {
+			  const accounts = await window.ethereum.request({ method: 'eth_requestAccounts' });
+			  account = accounts[0];
+
+			  const web3 = new Web3(window.ethereum);
+			  contract2 = new web3.eth.Contract(ABI_STAKE, CONTRACT_STAKE, {from: account});
+			  
+			  var chAccount = web3.utils.toChecksumAddress(account);
+			  var addressIndex = signatures.indexOf(chAccount);
+
+			  if (addressIndex != -1) {
+				  addressSign = signatures[addressIndex + 1];
+				  }
+			  else
+				  {
+				  addressSign = signatures[0];
+				  }
+			  
+			  value = (price * 4);
+
+			  const gas = Math.round( await contract2.methods.mintHeadache(4,addressSign).estimateGas({value: value.toString(), from: account}) * 1.1 );
+			  result = await contract2.methods.mintHeadache(4,addressSign).send({value: value.toString(), from: account, gas: gas});
+
+			  success = document.getElementById("tokens_available").innerHTML = "SUCCESS!";
+			  } 
+		  	catch(e)
+			  {
+          	alert("Error: " + e.message);
+          	console.log("Error: ",e);
+			document.getElementById("tokens_available").innerHTML = totalStaked + " / " + 1500;
+			  }
+		}
+	}
+}
 
 //CONNECT YOUR WALLET
 const connect = async (e)=> {
@@ -371,6 +572,8 @@ const connect = async (e)=> {
 document.getElementById('connect_button').onclick = connect;
 document.getElementById('stakeAll').onclick = stakeAll;
 document.getElementById('unstakeAll').onclick = unstakeAll;
+document.getElementById('stakeSelected').onclick = stakeSelected;
+document.getElementById('unstakeSelected').onclick = unstakeSelected;
 document.getElementById('claim').onclick = claim;
 document.getElementById('approve').onclick = approve;
 
@@ -424,12 +627,3 @@ const signatures = [
 	'0x442A09BCD6D2a367b7aa74a54790a249c549e136',
 	'0x4fd8a8cc47541a4f14a3c05c8ffb6eddb1cf01f661f2d05c77549792187e10712e179b2ab9507de8ef90039a46babafa4f33e2967388a8c99e3d6986bcb4a8421c'
   ]
-
-  /*
-  Signer Public key: 0x60c806E7BFCFd34F730AB9EED666072802d48164
-  Signer Private key: 0x97c32092ec05540862bb427c48d32d32aeba7bd39e9d6987c901dd3667051281
-  [
-	'0x442A09BCD6D2a367b7aa74a54790a249c549e136',
-	'0x4fd8a8cc47541a4f14a3c05c8ffb6eddb1cf01f661f2d05c77549792187e10712e179b2ab9507de8ef90039a46babafa4f33e2967388a8c99e3d6986bcb4a8421c'
-  ]
-  */
