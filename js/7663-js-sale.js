@@ -461,13 +461,17 @@ const connect = async (e)=> {
   	  	contract2 = new web3.eth.Contract(ABI_STAKE, CONTRACT_STAKE, {gas: 300000000});
 
       		totalStaked = await contract2.methods.totalStaked().call();
+		
+		document.getElementById("tokens_available").innerHTML = totalStaked + " / " + 1500;
+		
 		var tokensStaked = await contract2.methods.tokensOfOwner(account).call();
 		//price = await contract2.methods.cost().call();
-
+		
 		stakedTokensArray = Array.from(tokensStaked);
-		earningInfo = await contract2.methods.earningInfo(account,stakedTokensArray).call();
-
-	  	document.getElementById("tokens_available").innerHTML = totalStaked + " / " + 1500;
+		
+		if (stakedTokensArray != 0) {
+			earningInfo = await contract2.methods.earningInfo(account,[stakedTokensArray[0]]).call() * stakedTokensArray.length;
+			}
 
 		if (earningInfo != 0)
 			{
