@@ -452,43 +452,43 @@ const connect = async (e)=> {
   	if (typeof window.ethereum !== 'undefined') {
     	console.log('MetaMask is installed!');
     	const accounts = await window.ethereum.request({ method: 'eth_requestAccounts' })
-		account = accounts[0];
+	account = accounts[0];
 
     	if (account.length != 0) {
         	document.getElementById("connect_button").innerHTML = account.substr(0,10) + "..." + account.substr(-4);
 
-  	  		const web3 = new Web3(window.ethereum);
-  	  		contract2 = new web3.eth.Contract(ABI_STAKE, CONTRACT_STAKE, {gas: 300000000});
+  	  	const web3 = new Web3(window.ethereum);
+  	  	contract2 = new web3.eth.Contract(ABI_STAKE, CONTRACT_STAKE, {gas: 300000000});
 
-      			totalStaked = await contract2.methods.totalStaked().call();
-			var tokensStaked = await contract2.methods.tokensOfOwner(account).call();
-			price = await contract2.methods.cost().call();
+      		totalStaked = await contract2.methods.totalStaked().call();
+		var tokensStaked = await contract2.methods.tokensOfOwner(account).call();
+		//price = await contract2.methods.cost().call();
 
-			stakedTokensArray = Array.from(tokensStaked);
-			earningInfo = await contract2.methods.earningInfo(account,[stakedTokensArray[0]]).call() * stakedTokensArray.length;
+		stakedTokensArray = Array.from(tokensStaked);
+		earningInfo = await contract2.methods.earningInfo(account,[stakedTokensArray[0]]).call() * stakedTokensArray.length;
 
-	  		document.getElementById("tokens_available").innerHTML = totalStaked + " / " + 1500;
+	  	document.getElementById("tokens_available").innerHTML = totalStaked + " / " + 1500;
 
-			if (earningInfo != 0)
-				{
-				document.getElementById("rewards").innerHTML = String(earningInfo / 1e18).substr(0,8);
-				}
-				else
-				{
-				document.getElementById("rewards").innerHTML = "No rewards to claim.";
-				}
-
-			approveState();
-			await getTokens();
-			getTokens2();
-			}
-    			else
+		if (earningInfo != 0)
 			{
-        	document.getElementById("connect_button").innerHTML = "Connect wallet";
+			document.getElementById("rewards").innerHTML = String(earningInfo / 1e18).substr(0,8);
 			}
-  		}
-  		return false;
+		else
+			{
+			document.getElementById("rewards").innerHTML = "No rewards to claim.";
+			}
+
+		approveState();
+		await getTokens();
+		getTokens2();
+		}
+    	else
+	{
+        document.getElementById("connect_button").innerHTML = "Connect wallet";
 	}
+  }
+  return false;
+}
   
 //BUTTON FUNCTIONS
 document.getElementById('connect_button').onclick = connect;
