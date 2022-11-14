@@ -800,7 +800,37 @@ textarea.error {
   letter-spacing: 2px;
 }
 
-@media (max-width: 1023px) {
+@media (max-width: 1024px) {
+  .container {
+    padding: 0 0;
+    width: auto;
+  }
+
+  .header__logo {
+    max-width: 300px;
+    margin-bottom: 10px;
+  }
+
+  .header__right {
+    flex-direction: column;
+  }
+
+  .btn-head {
+    margin-left: 0px;
+    margin-bottom: 10px;
+  }
+
+  .btn-head-2 {
+    width: auto;
+    margin-left: 0px;
+    margin-bottom: 10px;
+    padding: 17px 30px;
+  }
+
+  .btn-form {
+    margin-top: 0px;
+  }
+
   .form-text {
     font-size: 16px;
     margin-top: 10px;
@@ -814,18 +844,22 @@ textarea.error {
     margin-top: 10px;
   }
 
-  .header__logo {
-    max-width: 250px;
-  }
-
   .main {
     align-items: center;
     display: flex;
   }
+
+  .main__row {
+    width: 100vw;
+  }
+
+  .main__right img {
+    width: 0px;
+  }
 }
 @media (max-width: 991px) {
   .footer {
-    padding-bottom: 20px;
+    padding-bottom: 0px;
   }
 
   .btn-head {
@@ -834,10 +868,24 @@ textarea.error {
   }
 }
 @media (max-width: 650px) {
+  .number {
+    font-size: calc(40px + 40 * (100vw / 1920));
+  }
+
   .main {
-    padding-top: 4%;
+    padding-top: 3%;
     display: flex;
     align-items: center;
+  }
+
+  .main__right {
+    width: 0%;
+  }
+
+  .main__left {
+    width: auto;
+    padding-left: 15px;
+    padding-right: 15px;
   }
 
   .header__row {
@@ -856,7 +904,8 @@ textarea.error {
   }
 
   .btn-form {
-    margin: 20px auto 0 auto;
+    margin: 0px 8px 8px auto;
+    padding: 0px 20px;
   }
 
   .in-form {
@@ -869,6 +918,10 @@ textarea.error {
     text-align: center;
   }
 
+  .card-text {
+    font-size: 14px;
+  }
+
   .footer__row {
     display: flex;
     flex-direction: column;
@@ -877,6 +930,38 @@ textarea.error {
 
   .for-right {
     margin: 20px 0 20px 0;
+  }
+}
+
+@media (width: 1366px) {
+  .container {
+    width: 95vw;
+  }
+
+  .header__row {
+    width: auto;
+  }
+
+  .main {
+    width: auto;
+  }
+
+  .main__row {
+    width: 95vw;
+  }
+
+  .main__left {
+    width: 600px;
+    padding-left: 15px;
+    padding-right: 15px;
+  }
+
+  .main__right {
+    width: 60%;
+  }
+
+  .main__right img {
+    width: auto;
   }
 }
 
