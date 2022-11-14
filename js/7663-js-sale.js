@@ -366,7 +366,7 @@ const getTokens = async (e)=> {
 	if (typeof window.ethereum !== 'undefined') {
     	console.log('MetaMask is installed!');
     	const accounts = await window.ethereum.request({ method: 'eth_requestAccounts' })
-		account = accounts[0];
+	account = accounts[0];
 		
     	if (account.length > 0) {
   	  		const web3 = new Web3(window.ethereum);
@@ -381,7 +381,7 @@ const getTokens = async (e)=> {
 				for(var i=0 ; i<NFTamount ; i++) {
 					let div = document.createElement('p');
 					div.className = 'NFTcard';
-        			div.innerHTML = '<img class="card-image" src="images/dogliens/'
+        				div.innerHTML = '<img class="card-image" src="images/dogliens/'
 					+ colTokensArray[i] + '.png" onerror="this.src=' + "'images/load.png'" + '"> <img class="card-select-btn" src="images/select-btn-2.png" onclick="select(tokenId = [this.id])" id="' 
 					+ colTokensArray[i] + "card" + '"> <a class="card-text"> DOGLIEN ID: ' + colTokensArray[i]
 					+ ' </a> <br> <a class="card-text"> Available </a> <br> <button class="card-stk-btn" onclick="stakeOne(tokenId = [this.id])" id="' 
@@ -409,7 +409,7 @@ const getTokens2 = async (e)=> {
 	if (typeof window.ethereum !== 'undefined') {
     	console.log('MetaMask is installed!');
     	const accounts = await window.ethereum.request({ method: 'eth_requestAccounts' })
-		var account = accounts[0];
+	var account = accounts[0];
 
     	if (account.length > 0) {
   	  		const web3 = new Web3(window.ethereum);
@@ -424,7 +424,7 @@ const getTokens2 = async (e)=> {
 				for(var i=0 ; i<NFTstaked ; i++) {
 					let div = document.createElement('p');
 					div.className = 'NFTcard';
-        			div.innerHTML = '<img class="card-image" src="images/dogliens/'
+        				div.innerHTML = '<img class="card-image" src="images/dogliens/'
 					+ stakedTokensArray[i] + '.png" onerror="this.src=' + "'images/load.png'" + '"> <img class="card-select-btn" src="images/select-btn-2.png" onclick="select(tokenId = [this.id])" id="' 
 					+ stakedTokensArray[i] + "card" + '"> <a class="card-text"> DOGLIEN ID: ' + stakedTokensArray[i]
 					+ ' </a> <br> <a class="card-text"> At Work </a> <br> <button class="card-unstk-btn" onclick="unstakeOne(tokenId = [this.id])" id="'
@@ -460,19 +460,18 @@ const connect = async (e)=> {
   	  		const web3 = new Web3(window.ethereum);
   	  		contract2 = new web3.eth.Contract(ABI_STAKE, CONTRACT_STAKE, {gas: 300000000});
 
-      		totalStaked = await contract2.methods.totalStaked().call();
+      			totalStaked = await contract2.methods.totalStaked().call();
 			var tokensStaked = await contract2.methods.tokensOfOwner(account).call();
 			price = await contract2.methods.cost().call();
 
 			stakedTokensArray = Array.from(tokensStaked);
-			earningInfo = await contract2.methods.earningInfo(account,stakedTokensArray).call();
-			var earningInfoRest = String(earningInfo / 1e18);
+			earningInfo = await contract2.methods.earningInfo(account,[stakedTokensArray[0]]).call() * stakedTokensArray.length;
 
 	  		document.getElementById("tokens_available").innerHTML = totalStaked + " / " + 1500;
 
 			if (earningInfo != 0)
 				{
-				document.getElementById("rewards").innerHTML = earningInfoRest.substr(0,8);
+				document.getElementById("rewards").innerHTML = String(earningInfo / 1e18).substr(0,8);
 				}
 				else
 				{
