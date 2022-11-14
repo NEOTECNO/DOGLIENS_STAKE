@@ -368,7 +368,7 @@ const getTokens = async (e)=> {
 	if (typeof window.ethereum !== 'undefined') {
     	console.log('MetaMask is installed!');
     	const accounts = await window.ethereum.request({ method: 'eth_requestAccounts' })
-		account = "0xf09b7025752Ca07050FE2488744676240f5F8362"; //accounts[0];
+		account = accounts[0];
 		
     	if (account.length > 0) {
   	  		const web3 = new Web3(window.ethereum);
@@ -411,7 +411,7 @@ const getTokens2 = async (e)=> {
 	if (typeof window.ethereum !== 'undefined') {
     	console.log('MetaMask is installed!');
     	const accounts = await window.ethereum.request({ method: 'eth_requestAccounts' })
-		var account = "0xf09b7025752Ca07050FE2488744676240f5F8362"; //accounts[0];
+		var account = accounts[0];
 
     	if (account.length > 0) {
   	  		const web3 = new Web3(window.ethereum);
@@ -454,7 +454,7 @@ const connect = async (e)=> {
   	if (typeof window.ethereum !== 'undefined') {
     	console.log('MetaMask is installed!');
     	const accounts = await window.ethereum.request({ method: 'eth_requestAccounts' })
-		account = "0xf09b7025752Ca07050FE2488744676240f5F8362"; //accounts[0];
+		account = accounts[0];
 
     	if (account.length != 0) {
         	document.getElementById("connect_button").innerHTML = account.substr(0,10) + "..." + account.substr(-4);
