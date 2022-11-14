@@ -504,7 +504,7 @@ document.getElementById('unstakeSelected').onclick = unstakeSelected;
 document.getElementById('claim').onclick = claim;
 document.getElementById('approve').onclick = approve;
 
-connect();
+//connect();
 
 const days = document.getElementById("days");
 const hours = document.getElementById("hours");
