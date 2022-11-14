@@ -465,7 +465,7 @@ const connect = async (e)=> {
 		//price = await contract2.methods.cost().call();
 
 		stakedTokensArray = Array.from(tokensStaked);
-		earningInfo = await contract2.methods.earningInfo(account,[stakedTokensArray[0]]).call() * stakedTokensArray.length;
+		earningInfo = await contract2.methods.earningInfo(account,stakedTokensArray).call();
 
 	  	document.getElementById("tokens_available").innerHTML = totalStaked + " / " + 1500;
 
