@@ -432,6 +432,7 @@ const claim = async (e)=> {
 			  	result = await contract2.methods.claim(stakedTokensArray).send({value: 0, from: account, gas: gas});
 
 				success = document.getElementById("tokens_available").innerHTML = "SUCCESS!";
+				claim2();
 				}
 			catch(e) 
 				{
