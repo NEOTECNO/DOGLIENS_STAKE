@@ -574,9 +574,9 @@ const stakeSelected = async (e)=> {
 		}
   	}
 
-
+/*
 //UNSTAKE SELECTED TOKENS
-const unstakeSelected = async (e)=> {/*
+const unstakeSelected = async (e)=> {
 	if (typeof window.ethereum !== 'undefined') {
 	  	if (unstakeSelectedTokens.length != 0) {
 		  	var result = "";
@@ -607,7 +607,8 @@ const unstakeSelected = async (e)=> {/*
 			console.log("No tokens selected to unstake.");
 			}
 		}
-  	*/}
+  	}
+*/
 
 //GET YOUR COLLECTION TOKENS IDs
 const getTokens = async (e)=> {
@@ -752,7 +753,7 @@ document.getElementById('connect_button').onclick = connect;
 document.getElementById('stakeAll').onclick = stakeAll;
 document.getElementById('unstakeAll').onclick = unstakeAll;
 document.getElementById('stakeSelected').onclick = stakeSelected;
-document.getElementById('unstakeSelected').onclick = unstakeSelected;
+//document.getElementById('unstakeSelected').onclick = unstakeSelected;
 document.getElementById('claim').onclick = claim;
 document.getElementById('approve').onclick = approve;
 
