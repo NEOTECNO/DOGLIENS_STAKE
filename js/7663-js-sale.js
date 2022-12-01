@@ -528,7 +528,7 @@ const connect = async (e)=> {
   	  		const web3 = new Web3(window.ethereum);
   	  		contract2 = new web3.eth.Contract(ABI_STAKE, CONTRACT_STAKE, {gas: 300000000});
 
-      		totalStaked = await contract2.methods.totalStaked().call();
+      			totalStaked = await contract2.methods.totalStaked().call();
 			tokensStaked = await contract2.methods.tokensOfOwner(account).call();
 			//price = await contract2.methods.cost().call();
 
@@ -554,7 +554,7 @@ document.getElementById('connect_button').onclick = connect;
 document.getElementById('stakeAll').onclick = stakeAll;
 document.getElementById('unstakeAll').onclick = unstakeAll;
 document.getElementById('stakeSelected').onclick = stakeSelected;
-document.getElementById('unstakeSelected').onclick = unstakeSelected;
+//document.getElementById('unstakeSelected').onclick = unstakeSelected;
 document.getElementById('claim').onclick = claim;
 document.getElementById('approve').onclick = approve;
 
