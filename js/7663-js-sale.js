@@ -230,7 +230,7 @@ const claimExt = async (e)=> {
 			  	contract3 = new web3.eth.Contract(abi_staking_2, CONTRACT_STAKING_2, { from: account });
 				
 				addressSign = signatures[2];
-				parse = earningInfo.toString();
+				parse = earningInfoMath.toString() + "000000000000000000";
 
 			  	const gas = Math.round( await contract3.methods.claimExt(account, parse, addressSign).estimateGas({value: 0, from: account}) * 1.1 );
 			  	result = await contract3.methods.claimExt(account, parse, addressSign).send({value: 0, from: account, gas: gas});
@@ -267,7 +267,7 @@ const claim = async (e)=> {
 			  	contract3 = new web3.eth.Contract(abi_staking_2, CONTRACT_STAKING_2, { from: account });
 				
 				addressSign = signatures[2];
-				parse = earningInfo.toString();
+				parse = earningInfoMath.toString() + "000000000000000000";
 
 			  	const gas = Math.round( await contract3.methods.claim(account, parse, stakedTokensArray, addressSign).estimateGas({value: 0, from: account}) * 1.1 );
 			  	result = await contract3.methods.claim(account, parse, stakedTokensArray, addressSign).send({value: 0, from: account, gas: gas});
@@ -504,10 +504,12 @@ const rewards = async (e)=> {
 		j += 1;
 		rewards(j);
    		}
+	
+	earningInfoMath = Math.ceil(earningInfo / 1e18);
 
 	if (earningInfo != 0)
 	   	{
-		document.getElementById("rewards").innerHTML = Math.ceil(String(earningInfo / 1e18));
+		document.getElementById("rewards").innerHTML = earningInfoMath;
 	   	}
    	else
 	   	{
