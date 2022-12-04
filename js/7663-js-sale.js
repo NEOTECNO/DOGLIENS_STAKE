@@ -507,7 +507,7 @@ const rewards = async (e)=> {
 
 	if (earningInfo != 0)
 	   	{
-		document.getElementById("rewards").innerHTML = String(earningInfo / 1e18).substr(0,7);
+		document.getElementById("rewards").innerHTML = Math.ceil(String(earningInfo / 1e18));
 	   	}
    	else
 	   	{
