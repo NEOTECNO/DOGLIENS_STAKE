@@ -23,7 +23,7 @@ var stakeSelectedTokens = [];
 var unstakeSelectedTokens = [];
 var totalStaked = "";
 var earningInfo = 0;
-var earningInfoRest = 0;
+var earningInfoMath = 0;
 var approved = "";
 var j = 0;
 
