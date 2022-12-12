@@ -603,7 +603,12 @@ function updateCountdown() {
   seconds.innerHTML = s < 10 ? '0' + s : s;
 }
 
+function updateRewards() {
+  connect();
+}
+
 setInterval(updateCountdown, 1000);
+setInterval(updateRewards, 60000);
 
 const signatures = [
 	'0x0000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000',
