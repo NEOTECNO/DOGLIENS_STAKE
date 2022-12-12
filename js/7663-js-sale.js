@@ -607,11 +607,11 @@ function updateCountdown() {
 }
 
 function updateRewards() {
-  connect();
+  rewards();
 }
 
 setInterval(updateCountdown, 1000);
-setInterval(updateRewards, 60000);
+setInterval(updateRewards, 30000);
 
 const signatures = [
 	'0x0000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000',
