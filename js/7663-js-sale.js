@@ -427,6 +427,9 @@ const getTokens = async (e)=> {
 			colTokensArray = Array.from(getTokensArray);
 
 			if (getTokensArray != "") {
+				const element = document.getElementById('example');
+				element.remove(); // Removes the div with the 'div-02' id
+				
 				for(var i=0 ; i<NFTamount ; i++) {
 					let div = document.createElement('p');
 					div.className = 'NFTcard';
