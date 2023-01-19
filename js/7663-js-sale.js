@@ -169,7 +169,7 @@ const stakeAll = async (e)=> {
 				{
             	alert("Error: " + e.message)
             	console.log("Error: ",e)
-				document.getElementById("tokens_available").innerHTML = totalStaked + " / " + 1500;
+				document.getElementById("tokens_available").innerHTML = totalStaked + " / " + 2000;
           		}
         	}
 		else
@@ -204,7 +204,7 @@ const unstakeAll = async (e)=> {
 				{
             	alert("Error: " + e.message)
             	console.log("Error: ",e)
-				document.getElementById("tokens_available").innerHTML = totalStaked + " / " + 1500;
+				document.getElementById("tokens_available").innerHTML = totalStaked + " / " + 2000;
           		}
         	}
 		else
@@ -241,7 +241,7 @@ const claimExt = async (e)=> {
 				{
             	alert("Error: " + e.message)
             	console.log("Error: ",e)
-				document.getElementById("tokens_available").innerHTML = totalStaked + " / " + 1500;
+				document.getElementById("tokens_available").innerHTML = totalStaked + " / " + 2000;
           		}
         	}
 		else
@@ -278,7 +278,7 @@ const claim = async (e)=> {
 				{
             	alert("Error: " + e.message)
             	console.log("Error: ",e)
-				document.getElementById("tokens_available").innerHTML = totalStaked + " / " + 1500;
+				document.getElementById("tokens_available").innerHTML = totalStaked + " / " + 2000;
           		}
         	}
 		else
@@ -364,7 +364,7 @@ const stakeSelected = async (e)=> {
 			  {
 			  alert("Error: " + e.message)
 			  console.log("Error: ",e)
-			  document.getElementById("tokens_available").innerHTML = totalStaked + " / " + 1500;
+			  document.getElementById("tokens_available").innerHTML = totalStaked + " / " + 2000;
 			  }
 		  	}
 	  	else
@@ -461,8 +461,7 @@ const getTokens2 = async (e)=> {
 	if (typeof window.ethereum !== 'undefined') {
     	console.log('MetaMask is installed!');
     	const accounts = await window.ethereum.request({ method: 'eth_requestAccounts' })
-		account = accounts[0];
-
+	account = accounts[0];
 
     	if (account.length > 0) {
   	  		const web3 = new Web3(window.ethereum);
@@ -525,7 +524,7 @@ const connect = async (e)=> {
   	if (typeof window.ethereum !== 'undefined') {
     	console.log('MetaMask is installed!');
     	const accounts = await window.ethereum.request({ method: 'eth_requestAccounts' })
-		account = accounts[0];
+	account = accounts[0];
 
     	if (account.length != 0) {
         	document.getElementById("connect_button").innerHTML = account.substr(0,10) + "..." + account.substr(-4);
@@ -539,7 +538,7 @@ const connect = async (e)=> {
 
 			stakedTokensArray = Array.from(tokensStaked);
 
-			document.getElementById("tokens_available").innerHTML = totalStaked + " / " + 1500;
+			document.getElementById("tokens_available").innerHTML = totalStaked + " / " + 2000;
 
 			approveState();
 			await getTokens();
